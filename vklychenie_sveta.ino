@@ -34,11 +34,9 @@ void loop(){
 
 
   
-switch (svet) {
+switch (svet)
 case 0:
   svetMS = ms;
   break;
-  case10:
-  if (!digitalRead
 
 
