@@ -1,6 +1,8 @@
+/* компилятор не указывает ни каких ошибок,выдает оштбку компиляции для платы*/
+
 
 #define IK_TUALET 2
-#define IK_VANNA 3 
+#define IK_VANNA 3
 #define RELE_SVET_VANNA 10
 #define RELE_SVET_TUALET 11
 #define LED_TUALET 9
@@ -12,7 +14,7 @@ unsigned long ms  = 0, svetMs = 0;
 unsigned int vremya_zadergki_tualet = 300000;
 unsigned int vremya_zadergki_vanna = 300000;
 
-void setup(){
+void setup() {
   Serial.begin(9600);
   pinMode(IK_TUALET, INPUT_PULLUP);
   pinMode(IK_VANNA, INPUT_PULLUP);
@@ -20,23 +22,42 @@ void setup(){
   pinMode(RELE_SVET_TUALET, OUTPUT);
   pinMode(LED_TUALET, OUTPUT);
   pinMode(LED_VANNA, OUTPUT);
-}
+} // setup
 
-void loop(){
+void loop() {
   ms = millis();
-  if (!digitalRead(IK_TUALET))
-  
-     svet = 10;
-     while (!digitalRead(IK_TUALET));
-     delay(20);
-  
-  }
+  if (!digitalRead(IK_TUALET)) {
+
+    svet = 10;
+    while (!digitalRead(IK_TUALET));
+    delay(20);
 
 
-  
-switch (svet)
-case 0:
-  svetMS = ms;
-  break;
+  } //if
 
+
+
+  switch (svet) {
+    case 0:
+      svetMs = ms;
+      break;
+
+case10:
+      if ((ms - svetMs) > vremya_zadergki_tualet) {
+        svetMs = ms;
+        digitalWrite(RELE_SVET_TUALET, 1);
+        Serial.print(" tualet vklychen");
+        svet = 11;
+      } //ms
+      break;
+
+case11:
+      if ((ms - svetMs) > vremya_zadergki_tualet) {
+        svetMs = ms;
+        digitalWrite(RELE_SVET_TUALET, 0);
+        Serial.print("tualet viklychen");
+      } //ms
+
+  } //switch
+}// loop
 
