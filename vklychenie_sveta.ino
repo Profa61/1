@@ -25,12 +25,15 @@ void setup() {
 } // setup
 
 void loop() {
-  Serial.println(digitalRead(IK_TUALET));
+  Serial.print("IK_TUALET=");
+  Serial.print(digitalRead(IK_TUALET));
+  Serial.print("svet=");
+  Serial.println(svet);
   ms = millis();
-  if (digitalRead(IK_TUALET)==RUKA) {
+  if (digitalRead(IK_TUALET) == RUKA) {
 
     svet = 10;
-    while (!digitalRead(IK_TUALET)==RUKA);
+    while (!digitalRead(IK_TUALET) == RUKA);
     delay(20);
 
 
@@ -43,7 +46,7 @@ void loop() {
       svetMs = ms;
       break;
 
-case10:
+    case 10:
       if ((ms - svetMs) > vremya_zadergki_tualet) {
         svetMs = ms;
         digitalWrite(RELE_SVET_TUALET, 1);
@@ -52,7 +55,7 @@ case10:
       } //ms
       break;
 
-case11:
+    case 11:
       if ((ms - svetMs) > vremya_zadergki_tualet) {
         svetMs = ms;
         digitalWrite(RELE_SVET_TUALET, 0);
