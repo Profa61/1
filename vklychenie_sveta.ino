@@ -1,6 +1,6 @@
 /* компилятор не указывает ни каких ошибок,выдает оштбку компиляции для платы*/
 
-
+#define RUKA 0
 #define IK_TUALET 2
 #define IK_VANNA 3
 #define RELE_SVET_VANNA 10
@@ -15,7 +15,7 @@ unsigned int vremya_zadergki_tualet = 300000;
 unsigned int vremya_zadergki_vanna = 300000;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(IK_TUALET, INPUT_PULLUP);
   pinMode(IK_VANNA, INPUT_PULLUP);
   pinMode(RELE_SVET_VANNA, OUTPUT);
@@ -25,11 +25,12 @@ void setup() {
 } // setup
 
 void loop() {
+  Serial.println(digitalRead(IK_TUALET));
   ms = millis();
-  if (!digitalRead(IK_TUALET)) {
+  if (digitalRead(IK_TUALET)==RUKA) {
 
     svet = 10;
-    while (!digitalRead(IK_TUALET));
+    while (!digitalRead(IK_TUALET)==RUKA);
     delay(20);
 
 
