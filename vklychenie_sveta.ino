@@ -1,42 +1,44 @@
 
-#define IK_tualet 2
-#define IK_vanna 3 
-#define rele_svet_vanna 10
-#define rele_svet_tualet 11
-#define Led_tualet 9
-#define Led_vanna 8
+#define IK_TUALET 2
+#define IK_VANNA 3 
+#define RELE_SVET_VANNA 10
+#define RELE_SVET_TUALET 11
+#define LED_TUALET 9
+#define LED_VANNA 8
 
 
 byte svet = 0;
 unsigned long ms  = 0, svetMs = 0;
-unsigned int vremya_zadergki_tualet = 300;
-unsigned int vremya_zadergki_vanna = 300;
+unsigned int vremya_zadergki_tualet = 300000;
+unsigned int vremya_zadergki_vanna = 300000;
 
 void setup(){
   Serial.begin(9600);
-  pinMode(IK_tualet, INPUT_PULLUP);
-  pinMode(IK_vanna, INPUT_PULLUP);
-  pinMode(rele_svet_vanna, OUTPUT);
-  pinMode(rele_svet_tualet, OUTPUT);
-  pinMode(Led_tualet, OUTPUT);
-  pinMode(Led_vanna, OUTPUT);
+  pinMode(IK_TUALET, INPUT_PULLUP);
+  pinMode(IK_VANNA, INPUT_PULLUP);
+  pinMode(RELE_SVET_VANNA, OUTPUT);
+  pinMode(RELE_SVET_TUALET, OUTPUT);
+  pinMode(LED_TUALET, OUTPUT);
+  pinMode(LED_VANNA, OUTPUT);
 }
 
 void loop(){
   ms = millis();
-  if (!digitalRead(IK_tualet))
+  if (!digitalRead(IK_TUALET))
   
      svet = 10;
-     while (!digitalRead(IK_tualet));
+     while (!digitalRead(IK_TUALET));
      delay(20);
-     
-        digitalWrite(Led_tualet, 1);
-        digitalWrite(rele_svet_tualet, 1);
-     
-    
+  
   }
 
 
   
+switch (svet) {
+case 0:
+  svetMS = ms;
+  break;
+  case10:
+  if (!digitalRead
 
 
